@@ -11,7 +11,6 @@ $.ajaxSetup({
     }
 });
 
-
 $( "#dbquery_form" ).submit(function( event ) {
     event.preventDefault();
     $('button:submit').attr("disabled", "disabled");
