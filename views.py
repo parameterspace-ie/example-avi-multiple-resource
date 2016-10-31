@@ -30,7 +30,13 @@ from django.views.decorators.http import require_http_methods
 
 from avi.models import DemoModel
 
+<<<<<<< HEAD
 
+||||||| merged common ancestors
+from pipeline import manager
+
+=======
+>>>>>>> develop
 from gavip_avi.decorators import require_gavip_role  # use this to restrict access to views in an AVI
 ROLES = settings.GAVIP_ROLES
 
@@ -46,7 +52,6 @@ def index(request):
     """
     context = {
         "millis": int(round(time.time() * 1000)),
-        "standalone": False,  # This stops the base template rendering the navbar on top
         "show_welcome": request.session.get('show_welcome', True)
     }
     request.session['show_welcome'] = False
@@ -94,16 +99,3 @@ def job_result(request, job_id):
     with open(file_path, 'r') as out_file:
         context.update(json.load(out_file))
     return render(request, 'avi/job_result.html', context=context)
-
-
-@require_http_methods(["GET"])
-def job_result_public(request, job_id, celery_task_id):
-    """
-    @req: REQ-0035
-    @comp: AVI Authentication and Authorization
-    """
-    job = get_object_or_404(DemoModel, request_id=job_id)
-    if celery_task_id == job.request.celery_task_id:
-        return job_result(request, job_id)
-    else:
-        raise ObjectDoesNotExist("Invalid public URL")
