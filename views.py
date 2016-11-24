@@ -30,13 +30,6 @@ from django.views.decorators.http import require_http_methods
 
 from avi.models import DemoModel
 
-<<<<<<< HEAD
-
-||||||| merged common ancestors
-from pipeline import manager
-
-=======
->>>>>>> develop
 from gavip_avi.decorators import require_gavip_role  # use this to restrict access to views in an AVI
 ROLES = settings.GAVIP_ROLES
 
